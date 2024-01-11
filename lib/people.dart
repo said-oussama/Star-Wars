@@ -29,9 +29,103 @@ class people extends StatefulWidget {
 }
 
 class _peopleState extends State<people> {
+  late Future<List<Film>> filmsFuture;
+  List<Film> films = []; 
+
+  @override
+  void initState() {
+    super.initState();
+    filmsFuture = fetchFilms(http.Client());
+    filmsFuture.then((value) {
+      setState(() {
+        films = value;
+      });
+    });
+  }
+  
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp(
+      theme: ThemeData(scaffoldBackgroundColor: Color(0xFFFFFFFF)),
+      home: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(56.sp),
+          child: AppBar(
+            backgroundColor: Color(0xFFEBEBEB),
+
+            title: Padding(
+              padding: EdgeInsets.all(39.sp),
+              child: Container(
+                width: 188.sp,
+                height: 20.sp,
+                child: Text(
+                  "Think-it Star Wars",
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    height: 20.sp /24.sp, 
+                        
+
+                    fontFamily:
+                        'Archivo', 
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF000000),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            centerTitle: true,
+          ),
+        ),
+        body: Column(
+          children: [
+            Card(
+              elevation: 4.sp, 
+              color: Color(0xFF161615),
+              shape: RoundedRectangleBorder(
+                  
+                  ),
+              child: Container(
+                height: 236.sp,
+                width: 414.sp,
+                child: Padding(
+                  
+                  padding: EdgeInsets.fromLTRB(9.sp, 0, 0, 0),
+
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      
+
+                      Container(
+                        width: 146.sp,
+                        height: 146.sp,
+                        child: Expanded(
+                          child: Image(
+                            image: AssetImage(
+                              "assets/star_wars_logo_2.png",
+                              
+                            ),
+                            fit: BoxFit.none,
+                          ),
+                        ),
+                      ),
+
+                      
+                      
+                      
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            
+          ],
+        ),
+      ),
+    );
   }
 }
 
