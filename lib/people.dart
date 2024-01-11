@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 import 'dart:convert';
 
 import 'film.dart';
+import 'film_details.dart';
 
 Future<List<Film>> fetchFilms(http.Client client) async {
   final response =
@@ -29,7 +31,7 @@ class people extends StatefulWidget {
 }
 
 class _peopleState extends State<people> {
-  late Future<List<Film>> filmsFuture;
+   late Future<List<Film>> filmsFuture;
   List<Film> films = []; 
 
   @override
@@ -113,15 +115,55 @@ class _peopleState extends State<people> {
                         ),
                       ),
 
+                      SizedBox(
+                          height:
+                              30.sp), 
                       
-                      
-                      
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            
+
+                            child: Text(
+                              "Total ${films.length} Movies",
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                fontFamily:
+                                    'Archivo', 
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFFD8D8D8),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-            
+            Expanded(
+              child: FutureBuilder<List<Film>>(
+                future: fetchFilms(http.Client()),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('An error has occurred!'),
+                    );
+                  } else if (snapshot.hasData) {
+                    // Pass the data to onDataLoaded
+
+                    return FilmsList(films: snapshot.data!);
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -152,7 +194,181 @@ class FilmsList extends StatelessWidget {
           var created = film.created;
           var edited = film.edited;
 
-          
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => film_details(film: film)),
+              );
+            },
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  ),
+              color: Color(0xFF161615),
+              elevation: 4.sp,
+              child: Container(
+                height: 157.sp,
+                width: 414.sp,
+                child: Padding(
+                 
+                  padding: EdgeInsets.fromLTRB(9.sp, 15.sp,12.sp, 0.sp),
+                  child: Column(
+                    
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 66.sp,
+                            height: 20.sp,
+                            child: Text(
+                              "Release date",
+                              style: TextStyle(
+                                fontSize: 9.sp,
+                                height: 20.sp / 9.sp,
+                                fontFamily: 'Archivo',
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xF0F9F9F9),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 259.sp,
+                            height: 20.sp,
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                height: 20.sp / 23.sp,
+                                fontSize: 23.sp,
+                                fontFamily:
+                                    'Archivo', 
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xF0F9F9F9),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 66.sp,
+                            height: 20.sp,
+                            child: Text(
+                              DateFormat('yyyy/MM/dd')
+                                  .format(DateTime.parse(release_date)),
+
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                height: 20.sp / 13.sp,
+                                fontFamily: 'Archivo',
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xF0F9F9F9),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5.sp),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 3.sp),
+                          Container(width: 127.sp,
+                            child: Text(
+                              'Director',
+                              style: TextStyle(
+                                fontSize: 9.sp,
+                                height: 20.sp / 9.sp,
+                                fontFamily:
+                                    'Archivo', 
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xF0F9F9F9),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            'Producer',
+                            style: TextStyle(
+                              fontSize: 9.sp,
+                              height: 20.sp / 9.sp,
+                              fontFamily:
+                                  'Archivo', 
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xF0F9F9F9),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 120.sp,
+                            height: 20.sp,
+                            child: Text(
+                              director,
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                height: 20.sp /13.sp, 
+                                    
+                                fontFamily:
+                                    'Archivo', 
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xF0F9F9F9),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10.sp),
+                          Container(
+                            width: 170.sp,
+                            height: 20.sp,
+                            child: Text(
+                              producer,
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                height: 20.sp / 13.sp,
+                                fontFamily:
+                                    'Archivo', 
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xF0F9F9F9),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 7.sp),
+                      Row(
+                        children: [
+                          SizedBox(width: 3.sp),
+                          Container(
+                            width: 300.sp,
+                            height: 27.sp,
+                            child: Text(
+                              opening_crawl.replaceAll('\n', ''),
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                               letterSpacing: -1,
+                                height: 1.sp,
+                                fontSize: 12.sp,
+                                fontFamily: 'Archivo',
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xF0F9F9F9),
+                              ),
+                              maxLines: 2,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
         }
       },
     );
