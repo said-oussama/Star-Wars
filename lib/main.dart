@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'splash_screen.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_ , child) {
+      builder: (_, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'First Method',
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child:  SplashScreen(),
+      child: SplashScreen(),
     );
   }
 }

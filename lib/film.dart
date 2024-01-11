@@ -19,7 +19,6 @@ class Film {
   });
 
   factory Film.fromJson(Map<String, dynamic> json) {
-
     return Film(
       director: json['director'] as String,
       title: json['title'] as String,

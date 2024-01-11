@@ -31,8 +31,8 @@ class people extends StatefulWidget {
 }
 
 class _peopleState extends State<people> {
-   late Future<List<Film>> filmsFuture;
-  List<Film> films = []; 
+  late Future<List<Film>> filmsFuture;
+  List<Film> films = [];
 
   @override
   void initState() {
@@ -44,7 +44,6 @@ class _peopleState extends State<people> {
       });
     });
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,6 @@ class _peopleState extends State<people> {
           preferredSize: Size.fromHeight(56.sp),
           child: AppBar(
             backgroundColor: Color(0xFFEBEBEB),
-
             title: Padding(
               padding: EdgeInsets.all(39.sp),
               child: Container(
@@ -65,11 +63,8 @@ class _peopleState extends State<people> {
                   "Think-it Star Wars",
                   style: TextStyle(
                     fontSize: 24.sp,
-                    height: 20.sp /24.sp, 
-                        
-
-                    fontFamily:
-                        'Archivo', 
+                    height: 20.sp / 24.sp,
+                    fontFamily: 'Archivo',
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF000000),
                   ),
@@ -83,24 +78,18 @@ class _peopleState extends State<people> {
         body: Column(
           children: [
             Card(
-              elevation: 4.sp, 
+              elevation: 4.sp,
               color: Color(0xFF161615),
-              shape: RoundedRectangleBorder(
-                  
-                  ),
+              shape: RoundedRectangleBorder(),
               child: Container(
                 height: 236.sp,
                 width: 414.sp,
                 child: Padding(
-                  
                   padding: EdgeInsets.fromLTRB(9.sp, 0, 0, 0),
-
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      
-
                       Container(
                         width: 146.sp,
                         height: 146.sp,
@@ -108,30 +97,22 @@ class _peopleState extends State<people> {
                           child: Image(
                             image: AssetImage(
                               "assets/star_wars_logo_2.png",
-                              
                             ),
                             fit: BoxFit.none,
                           ),
                         ),
                       ),
-
-                      SizedBox(
-                          height:
-                              30.sp), 
-                      
+                      SizedBox(height: 30.sp),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Container(
-                            
-
                             child: Text(
                               "Total ${films.length} Movies",
                               style: TextStyle(
                                 fontSize: 15.sp,
-                                fontFamily:
-                                    'Archivo', 
+                                fontFamily: 'Archivo',
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xFFD8D8D8),
                               ),
@@ -203,18 +184,15 @@ class FilmsList extends StatelessWidget {
               );
             },
             child: Card(
-              shape: RoundedRectangleBorder(
-                  ),
+              shape: RoundedRectangleBorder(),
               color: Color(0xFF161615),
               elevation: 4.sp,
               child: Container(
                 height: 157.sp,
                 width: 414.sp,
                 child: Padding(
-                 
-                  padding: EdgeInsets.fromLTRB(9.sp, 15.sp,12.sp, 0.sp),
+                  padding: EdgeInsets.fromLTRB(9.sp, 15.sp, 12.sp, 0.sp),
                   child: Column(
-                    
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -247,8 +225,7 @@ class FilmsList extends StatelessWidget {
                               style: TextStyle(
                                 height: 20.sp / 23.sp,
                                 fontSize: 23.sp,
-                                fontFamily:
-                                    'Archivo', 
+                                fontFamily: 'Archivo',
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xF0F9F9F9),
                               ),
@@ -260,7 +237,6 @@ class FilmsList extends StatelessWidget {
                             child: Text(
                               DateFormat('yyyy/MM/dd')
                                   .format(DateTime.parse(release_date)),
-
                               style: TextStyle(
                                 fontSize: 13.sp,
                                 height: 20.sp / 13.sp,
@@ -277,14 +253,14 @@ class FilmsList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SizedBox(width: 3.sp),
-                          Container(width: 127.sp,
+                          Container(
+                            width: 127.sp,
                             child: Text(
                               'Director',
                               style: TextStyle(
                                 fontSize: 9.sp,
                                 height: 20.sp / 9.sp,
-                                fontFamily:
-                                    'Archivo', 
+                                fontFamily: 'Archivo',
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xF0F9F9F9),
                               ),
@@ -295,8 +271,7 @@ class FilmsList extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 9.sp,
                               height: 20.sp / 9.sp,
-                              fontFamily:
-                                  'Archivo', 
+                              fontFamily: 'Archivo',
                               fontWeight: FontWeight.w400,
                               color: Color(0xF0F9F9F9),
                             ),
@@ -313,10 +288,8 @@ class FilmsList extends StatelessWidget {
                               director,
                               style: TextStyle(
                                 fontSize: 13.sp,
-                                height: 20.sp /13.sp, 
-                                    
-                                fontFamily:
-                                    'Archivo', 
+                                height: 20.sp / 13.sp,
+                                fontFamily: 'Archivo',
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xF0F9F9F9),
                               ),
@@ -331,8 +304,7 @@ class FilmsList extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 13.sp,
                                 height: 20.sp / 13.sp,
-                                fontFamily:
-                                    'Archivo', 
+                                fontFamily: 'Archivo',
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xF0F9F9F9),
                               ),
@@ -351,7 +323,7 @@ class FilmsList extends StatelessWidget {
                               opening_crawl.replaceAll('\n', ''),
                               textAlign: TextAlign.justify,
                               style: TextStyle(
-                               letterSpacing: -1,
+                                letterSpacing: -1,
                                 height: 1.sp,
                                 fontSize: 12.sp,
                                 fontFamily: 'Archivo',
